@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>index2</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js "></script>
+</head>
+
+<body>
+    <div id="app">
+        <button v-on:click.stop="checkFullName('wang','liyuan')">click</button>
+        <!-- 注意给input 绑定事件 必须是input  而不是click -->
+        <input type="text" v-on:input="getValue()" v-model='textValue'>
+        <p>{{textValue}}</p>
+        <p>{{getFullName(firstName,lastName)}}</p>
+        <a v-bind:href="url">baidu</a>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    firstName: "zhang",
+                    lastName: "xueliang",
+                    url: "http://www.baidu.com",
+                    textValue: "",
+                }
+            },
+            methods: {
+                getFullName: function(first, last) {
+                    // console.log(this);
+                    return first + " " + last;
+                    //注意 return 下面不能再写东西 不会执行了；
+                },
+                checkFullName: function(first, last) {
+                    console.log(this);
+                    this.firstName = first;
+                    this.lastName = last;
+                },
+                getValue: function() {
+                    // console.log(this);
+                    console.log(event.target.value);
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

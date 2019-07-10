@@ -5,12 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>index</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js "></script>
+    <style>
+        /* 此处的样式是配合下面的 setTimeout(function() { 来控制vuejs加载慢 导致页面乱码处理的样式 */
+        
+        [v-cloak] {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="app" class="mycss">
+    <div id="app" class="mycss" v-cloak>
         <button v-on:click="alertinfo">按钮</button>
         <button v-on:click="alertinfo2('打印事件：',$event)">按钮2</button>
         <input type="text" name="" v-model="messageinfo">
@@ -22,44 +29,46 @@
         <p>{{ getFullName()}}</p>
     </div>
     <script>
-        // 前面是否有  var vm =  都没关系，因为 vue 最终是返回了一个对象
-        /*
-        如果要用原生js控制，就必须有 vm ，这样就可以 vm.msg = 'aaa' 来改变了
-        */
-        var vm = new Vue({
-            el: "#app",
-            data() {
-                return {
-                    // 此处的变量都是 vm.msg = 。。。这样存在的
-                    messageinfo: "wertyuiuyt",
-                    msg: "1234567890",
-                    firstName: "longdong",
-                    lastName: "wang",
-                    fullName: "longdong wang",
-                    age: 30,
-                }
-            },
-            methods: {
-                //此处的方法都会最终在外部是 vm.alertinfo这样的形式存在的
-                alertinfo(event) {
-                    console.log(event);
+        setTimeout(function() {
+            // 前面是否有  var vm =  都没关系，因为 vue 最终是返回了一个对象
+            /*
+            如果要用原生js控制，就必须有 vm ，这样就可以 vm.msg = 'aaa' 来改变了
+            */
+            var vm = new Vue({
+                el: "#app",
+                data() {
+                    return {
+                        // 此处的变量都是 vm.msg = 。。。这样存在的
+                        messageinfo: "wertyuiuyt",
+                        msg: "1234567890",
+                        firstName: "longdong",
+                        lastName: "wang",
+                        fullName: "longdong wang",
+                        age: 30,
+                    }
                 },
-                alertinfo2(msg, event) {
-                    console.log(msg);
-                    console.log(event);
+                methods: {
+                    //此处的方法都会最终在外部是 vm.alertinfo这样的形式存在的
+                    alertinfo(event) {
+                        console.log(event);
+                    },
+                    alertinfo2(msg, event) {
+                        console.log(msg);
+                        console.log(event);
+                    },
+                    getFullName: function() { //这里不能使用箭头函数形式
+                        /*
+                        其实这里的this 就是指的 vm  因为我们在控制台用 vm.firstName 就可以输出结果
+                        */
+                        return this.firstName + " " + this.lastName;
+                    }
                 },
-                getFullName: function() {
-                    /*
-                    其实这里的this 就是指的 vm  因为我们在控制台用 vm.firstName 就可以输出结果
-                    */
-                    return this.firstName + " " + this.lastName;
-                }
-            },
-        });
+            });
+        }, 2000);
     </script>
     <script>
-        alert(vm.msg);
-        alert(vm.messageinfo);
+        // alert(vm.msg);
+        // alert(vm.messageinfo);
     </script>
     <style>
         * {
@@ -68,7 +77,7 @@
             margin: 0;
         }
         
-        .mycss {
+        .mycss2 {
             border: 1px solid #ccc;
             position: absolute;
             left: 0px;

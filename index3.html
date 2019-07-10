@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>index3</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js "></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-on:input="getValue(this,$event)">
+        <!-- 注意这里传的两个参数 一个是Window 一个是 InputEvent -->
+        <p v-bind:title="textValue">{{textValue}}</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    textValue: "",
+                }
+            },
+            methods: {
+
+                getValue: function(ev, event) {
+                    console.log(ev)
+                    console.log(event);
+                    //如果没有传任何参数  那么 event 就代表 InputEvent
+                    this.textValue = event.target.value;
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>
