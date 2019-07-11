@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>vfor</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js "></script>
 
 </head>
@@ -19,9 +19,15 @@
             <span v-for="(item,index) in strings" :key="index">{{index+1}}.{{item}}&nbsp;</span>
         </div>
         <div class="div3">
-            <ul>
-                <li>1111</li>
+            <ul v-for="(item,index) in books">
+                <li :key="index">名称：{{item.name}}，价格：{{item.price}}</li>
             </ul>
+        </div>
+        <div>{{Math.random()}}</div>
+
+        <div>
+            <button v-on:click="addNumbers">add number</button>
+            <button v-on:click="addBooks">add books</button>
         </div>
     </div>
 
@@ -32,7 +38,32 @@
                 return {
                     numbers: [34, 46, 234, 68, 23, 78, 2, 23, 57],
                     strings: ['aaa', 'bbb', 'rrr', 'eee'],
+                    books: [{
+                        name: 'vue',
+                        price: 34,
+                    }, {
+                        name: 'react',
+                        price: 5,
+                    }, {
+                        name: 'anglar',
+                        price: 18,
+                    }],
+                    grades: [{
+                        name: 'anglar',
+                        price: 18,
+                    }]
                 }
+            },
+            methods: {
+                addNumbers: function() {
+                    this.numbers.push(33);
+                },
+                addBooks: function() {
+                    this.books.push({
+                        name: "java",
+                        price: 58,
+                    });
+                },
             },
         });
     </script>

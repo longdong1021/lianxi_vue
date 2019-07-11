@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>computed_and_watch 计算属性及watch监听</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js "></script>
+
+</head>
+
+<body>
+    <div id="app">
+        {{num}}
+        <!-- 此处不需要像函数一样有圆括号 -->
+        <div>{{computedFullName}}</div>
+        <div>{{computedFullName}}</div>
+        <div>{{getFullName()}}</div>
+        <div>{{Math.random()}}</div>
+        <div v-on:click="getFullName">{{fullName}} 呜呜呜呜</div>
+        <div><button v-on:click="num++">click</button></div>
+        <div><button v-on:click="changeName">changeName</button></div>
+        <div></div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    num: 0,
+                    firstName: "aiming",
+                    lastName: "liu",
+                    fullName: "",
+                }
+            },
+            computed: {
+                computedFullName: function() {
+                    alert("computed");
+                    return this.firstName + " " + this.lastName;
+                },
+            },
+            methods: {
+                getFullName: function() {
+                    alert("methods");
+                },
+                changeName: function() {
+                    this.firstName = "longdong";
+                    this.lastName = "wang";
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

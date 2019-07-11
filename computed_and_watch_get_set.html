@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>computed_and_watch 计算属性及watch监听 get set</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js "></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <div>{{ num }}</div>
+        <div>{{ fullName }}</div>
+        <button v-on:click="num++">num++</button>
+        <button v-on:click="changeName">changeName</button>
+        <button v-on:click="changeFullName">changeFullName</button>
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    num: 0,
+                    firstName: "luwei",
+                    lastName: "liu",
+                }
+            },
+            computed: {
+                fullName: {
+                    get: function() {
+                        alert("我执行了get");
+                        return this.firstName + " " + this.lastName;
+                    },
+                    set: function(newValue) {
+                        console.log(newValue);
+                    }
+                },
+            },
+            methods: {
+                changeName: function() {
+                    this.firstName = "ming";
+                    this.lastName = "xiao";
+                },
+                getFullName: function() {
+                    alert("我执行了");
+                    return this.firstName + " " + this.lastName;
+                },
+                changeFullName: function() {
+                    this.fullName = "xiao hong";
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>
