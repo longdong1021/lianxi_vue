@@ -16,7 +16,7 @@
         <div>{{ fullName }}</div>
         <button v-on:click="num++">num++</button>
         <button v-on:click="changeName">changeName</button>
-        <button v-on:click="changeFullName">changeFullName</button>
+        <button v-on:click="changeFullName">changeFull</button>
 
     </div>
     <script>
@@ -36,7 +36,10 @@
                         return this.firstName + " " + this.lastName;
                     },
                     set: function(newValue) {
-                        console.log(newValue);
+                        // console.log(newValue);
+                        let arr = newValue.split(" ");
+                        this.firstName = arr[0];
+                        this.lastName = arr[1];
                     }
                 },
             },
