@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>computed_and_watch 计算属性及watch监听2</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js "></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <ul v-for="item in movies">
+            <li>{{item.name}} ( {{ item.year }} )</li>
+        </ul>
+        <ul v-for="movie in formateMovie">
+            <li>{{ movie }} </li>
+        </ul>
+        <button v-on:click="addMovie">添加电影</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    movies: [{
+                        name: "要冒转",
+                        year: 2018,
+                    }, {
+                        name: "狄仁杰",
+                        year: 2018,
+                    }, {
+                        name: "捉妖记2",
+                        year: 2018
+                    }]
+                }
+            },
+            watch: {
+                movies: function(new) {
+                    alert(new);
+                }
+            },
+            computed: {
+                formateMovie: function() {
+                    console.log(this.movies);
+                    return this.movies.map(function(movie) {
+                        return movie.name + " ( " + movie.year + " ) ";
+                    });
+                }
+            },
+            methods: {
+                addMovie: function() {
+                    this.movies.push({
+                        name: "新电影",
+                        year: 2019,
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

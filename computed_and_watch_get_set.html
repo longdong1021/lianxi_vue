@@ -13,8 +13,9 @@
 <body>
     <div id="app">
         <div>{{ num }}</div>
+        <div>{{Math.random()}}</div>
         <div>{{ fullName }}</div>
-        <button v-on:click="num++">num++</button>
+        <button v-on:click="numAdd">num++</button>
         <button v-on:click="changeName">changeName</button>
         <button v-on:click="changeFullName">changeFull</button>
 
@@ -37,6 +38,7 @@
                     },
                     set: function(newValue) {
                         // console.log(newValue);
+                        alert("我执行了set");
                         let arr = newValue.split(" ");
                         this.firstName = arr[0];
                         this.lastName = arr[1];
@@ -53,7 +55,10 @@
                     return this.firstName + " " + this.lastName;
                 },
                 changeFullName: function() {
-                    this.fullName = "xiao hong";
+                    this.fullName = "li li";
+                },
+                numAdd: function() {
+                    return this.num++;
                 }
             },
         });

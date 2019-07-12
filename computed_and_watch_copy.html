@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>computed_and_watch 计算属性及watch监听2</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js "></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="searchinfo">
+        <div v-show="showSearching">正在搜索。。。</div>
+        <ul>
+            <li v-for="item in result">{{ item }}</li>
+        </ul>
+        <div>{{searchinfo}}</div>
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    searchinfo: "",
+                    showSearching: false,
+                    result: [
+
+                    ]
+                }
+            },
+            watch: {
+                searchinfo: function(query) { //改变的值 query 
+                    console.log(this); //此处的this 指向vue实例
+                    this.showSearching = true;
+                    setTimeout(() => {
+                        //注意这里只能用箭头函数 不能用 setTimeout(function(){ 否则下面的this就指向window了
+                        console.log(this);
+                        this.result = ['jquery', 'vue', 'js'];
+                        this.showSearching = false;
+                    }, 500);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
