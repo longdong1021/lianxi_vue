@@ -15,9 +15,9 @@
         <ul v-for="item in movies">
             <li>{{item.name}} ( {{ item.year }} )</li>
         </ul>
-        <ul v-for="movie in formateMovie">
+        <!-- <ul v-for="movie in formateMovie">
             <li>{{ movie }} </li>
-        </ul>
+        </ul> -->
         <button v-on:click="addMovie">添加电影</button>
     </div>
     <script>
@@ -38,17 +38,18 @@
                 }
             },
             watch: {
-                movies: function(new) {
-                    alert(new);
-                }
+                // movies: function(newValue) {
+                //     console.log("123456");
+                //     console.log(newValue);
+                // }
             },
             computed: {
-                formateMovie: function() {
-                    console.log(this.movies);
-                    return this.movies.map(function(movie) {
-                        return movie.name + " ( " + movie.year + " ) ";
-                    });
-                }
+                // formateMovie: function() {
+                //     console.log("computed");
+                //     return this.movies.map(function(movie) {
+                //         return movie.name + " ( " + movie.year + " ) ";
+                //     });
+                // }
             },
             methods: {
                 addMovie: function() {
