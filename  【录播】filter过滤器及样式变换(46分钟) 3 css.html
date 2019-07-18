@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>利用filters转换成大写并链接</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js "></script>
+    <style>
+        * {
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 
+            v-bind:style="{backgroundColor:'red',}" //后面是逗号不能是“;”,
+            也可以写成：v-bind:style="{'background-color':'red',}"
+         -->
+        <div style="width: 200px; height:200px;" v-bind:style="{'background-color':'red',}"></div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    msg: "hello word!",
+                }
+            },
+            filters: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

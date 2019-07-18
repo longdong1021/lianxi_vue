@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>filters 传值</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js "></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <!-- 注意这里不能写成：{{ upperCase(msg) }} -->
+        {{ msg | upperCase(true) }}
+        <!-- upperCase(true) 传的是一个 Boolean 值 -->
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    msg: "hello world!!",
+
+                }
+            },
+            filters: {
+                upperCase: function(val, isFirstWord) { //默认(必须写)第一个参数就是筛选对象
+                    console.log(val)
+                        //vue 对于filters中没有封装this，所以拿不到
+                        // console.log(this.msg)
+                        // 所以不能写成如下形式
+                        // return this.msg.toString().toUpperCase();
+                        //Must be converted（转换） to a string 因为只有字符串才能转换成大写
+                    var val = val.toString();
+                    if (isFirstWord) {
+                        return val.charAt(0).toUpperCase() + val.slice(1);
+                    } else {
+                        return val.toUpperCase();
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

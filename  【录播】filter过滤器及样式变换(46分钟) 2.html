@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>利用filters转换成大写并链接</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js "></script>
+    <style>
+        * {
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div v-bind:title="msg | titleUpperCase">{{ msg }}</div>
+        <!-- 用 titleUpperCase 先把每个单词首字母转换成大写 ，再用 removeSpace 去掉中间的空格 -->
+        <div>{{ msg | titleUpperCase | removeSpace }}</div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    msg: "hello word!",
+                }
+            },
+            filters: {
+                titleUpperCase: function(val) {
+                    //全部转换成大写
+                    // return val.toString().toUpperCase();
+                    //第一个字母大写
+                    var arr = val.split(" "); //分割成数组
+                    var newarr = arr.map(function(item) { //map是循环后返回一个数组
+                        // charAt(0) 返回第0个位置的字节 
+                        // item.slice(1) 截取从1开始后面的字节
+                        return item.charAt(0).toUpperCase() + item.slice(1);
+                    });
+                    return newarr.join(" "); //数组转化成字符串join()，默认用逗号链接，.join(" ")是用空格链接
+                },
+                //第一种写法：
+                // removeSpace: function(val) {
+                //     var arr = val.split(" ");
+                //     var strMerge = '';
+                //     for (var i = 0; i < arr.length; i++) {
+                //         strMerge += arr[i];
+                //     }
+                //     return strMerge;
+                // },
+                //第二种写法：
+                removeSpace: function(val) {
+                    //   .replace(/ /g, "")  两个斜杠中间是要匹配的内容，此处是匹配空格，g代表匹配全部空格，后面双引号代表要替换的内容
+                    return val.toString().replace(/ /g, "");
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>

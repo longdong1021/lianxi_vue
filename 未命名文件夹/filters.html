@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>filters</title>
+    <script src="vue.js "></script>
+    <style>
+        .normall {
+            font-size: 16px;
+            color: #06f;
+        }
+        
+        .colcolor {
+            color: red;
+        }
+        
+        .colcolor2 {
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <div><a href="https://www.cnblogs.com/feiyu159/p/8620156.html">v-bind绑定属性样式——class的三种绑定方式</a></div>
+            <div :class="{'class-a':isA ,'class-b':isB}">1、布尔值的绑定方式</div>
+            <div :class=[classA,classB]>2、变量的绑定方式</div>
+            <div :class="classAA">3、字符串绑定方式</div>
+            <div :class="[one,{'classA':classa,'classB':classb}]">4、综合的写法</div>
+        </div>
+        <div v-bind:class="'normall' | setcolor">000000</div>
+
+        <ul>
+            <!--添加两个过滤器,注意不要冲突,注意先后顺序-->
+            <li v-for="item in list">{{item.id | filterAdd1 | filterAdd2}}</li>
+        </ul>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    siRead: true,
+                    isA: true,
+                    isB: true,
+                    classA: "class-a",
+                    classB: "class-b",
+                    classAA: "string",
+                    one: "string",
+                    classa: true,
+                    classb: false,
+                    list: [{
+                        "id": 0,
+                        "title": "11111",
+                        "cont": "111111"
+                    }, {
+                        "id": 1,
+                        "title": "22222",
+                        "cont": "111111"
+                    }, {
+                        "id": 2,
+                        "title": "33333",
+                        "cont": "111111"
+                    }, {
+                        "id": 3,
+                        "title": "44444",
+                        "cont": "111111"
+                    }, ]
+                }
+            },
+            filters: {
+                setcolor: function() {
+                    if (this.isRead) {
+                        return colcolor;
+                    } else {
+                        return colcolor2;
+                    }
+                },
+                filterAdd1(item) {
+                    return item + 10;
+                },
+                filterAdd2(item) {
+                    return '$' + item;
+                }
+            },
+            methods: {
+
+            },
+        });
+    </script>
+</body>
+
+</html>
